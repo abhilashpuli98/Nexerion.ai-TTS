@@ -6,12 +6,12 @@ from lmdeploy import pipeline, GenerationConfig, TurbomindEngineConfig
 
 from mira.utils import clear_cache, split_text
 
-class MiraTTS:
+class TTS:
 
-    def __init__(self, model_dir="YatharthS/MiraTTS", tp=1, enable_prefix_caching=True, cache_max_entry_count=0.2):
+    def __init__(self, tp=1, enable_prefix_caching=True, cache_max_entry_count=0.2):
         
         backend_config = TurbomindEngineConfig(cache_max_entry_count=cache_max_entry_count, tp=tp, dtype='bfloat16', enable_prefix_caching=enable_prefix_caching)
-        self.pipe = pipeline(model_dir, backend_config=backend_config)
+        self.pipe = pipeline("YatharthS/MiraTTS", backend_config=backend_config)
         self.gen_config = GenerationConfig(top_p=0.95,
                               top_k=50,
                               temperature=0.8,
